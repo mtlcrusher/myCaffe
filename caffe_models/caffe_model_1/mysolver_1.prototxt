@@ -6,12 +6,12 @@ lr_policy: "fixed"
 # lr_policy: "step"
 gamma: 0.1
 # stepsize: 2500
-display: 50
-max_iter: 10000
+display: 1000
+max_iter: 40000
 momentum: 0.9
 momentum2: 0.999
 # weight_decay: 0.0005
-snapshot: 100
+snapshot: 5000
 snapshot_prefix: "/content/myCaffe/caffe_models/caffe_model_1/caffe_model_1"
 solver_mode: GPU
 type: "Adam"
