@@ -48,7 +48,7 @@ layer {
 #    mirror: true
 #  }
   data_param {
-    source: "/content/myCaffe/data_dog_cat/validation_lmdb"
+    source: "/content/myCaffe/data_dog_cat/val_lmdb"
     batch_size: 50
     backend: LMDB
   }
