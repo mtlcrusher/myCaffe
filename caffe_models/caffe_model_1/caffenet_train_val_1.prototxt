@@ -34,7 +34,7 @@ layer {
   }
 
   data_param {
-    source: "/content/data_dog_cat/validation_lmdb"
+    source: "/content/data_dog_cat/val_lmdb"
     batch_size: 50
     backend: LMDB
   }
