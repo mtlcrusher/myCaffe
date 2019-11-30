@@ -35,9 +35,6 @@ if [ ! -d "$VAL_DATA_ROOT" ]; then
   exit 1
 fi
 
-rm -r $EXAMPLE/train_lmdb
-rm -r $EXAMPLE/val_lmdb
-
 echo "Creating train lmdb..."
 
 GLOG_logtostderr=1 convert_imageset \
