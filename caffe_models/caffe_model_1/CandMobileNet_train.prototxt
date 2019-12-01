@@ -167,7 +167,6 @@ layer {
 	    pad			: 1
 	    kernel_size	: 3
 	    group		: 32
-	    engine		: CUDNN
 	    stride		: 1
 	   
 	    weight_filler {
@@ -268,7 +267,6 @@ layer {
 	    bias_term	: false
 	    pad			: 0
 	    kernel_size	: 1
-	    engine		: CUDNN
 	    stride		: 1
 	   
 	    weight_filler {
@@ -374,7 +372,6 @@ layer {
 	    pad			: 1
 	    kernel_size	: 3
 	    group		: 64
-	    engine		: CUDNN
 	    stride		: 1
 	   
 	    weight_filler {
@@ -475,7 +472,6 @@ layer {
 	    bias_term	: false
 	    pad			: 0
 	    kernel_size	: 1
-	    engine		: CUDNN
 	    stride		: 1
 	   
 	    weight_filler {
@@ -581,7 +577,6 @@ layer {
 	    pad			: 1
 	    kernel_size	: 3
 	    group		: 128
-	    engine		: CUDNN
 	    stride		: 1
 	   
 	    weight_filler {
@@ -682,7 +677,6 @@ layer {
 	    bias_term	: false
 	    pad			: 0
 	    kernel_size	: 1
-	    engine		: CUDNN
 	    stride		: 1
 	   
 	    weight_filler {
