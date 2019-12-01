@@ -59,6 +59,7 @@ layer {
 		kernel_size	: 3
 		stride		: 2
 		pad			: 1
+		engine		: CAFFE
 
 		weight_filler {
 	      type: "msra"
@@ -156,6 +157,7 @@ layer {
 	    kernel_size	: 3
 	    group		: 32
 	    stride		: 1
+		engine		: CAFFE
 	   
 	    weight_filler {
 	      type: "msra"
@@ -250,6 +252,7 @@ layer {
 	    pad			: 0
 	    kernel_size	: 1
 	    stride		: 1
+		engine		: CAFFE
 	   
 	    weight_filler {
 	      type: "msra"
@@ -349,6 +352,7 @@ layer {
 	    kernel_size	: 3
 	    group		: 64
 	    stride		: 1
+		engine		: CAFFE
 	   
 	    weight_filler {
 	      type: "msra"
@@ -443,6 +447,7 @@ layer {
 	    pad			: 0
 	    kernel_size	: 1
 	    stride		: 1
+		engine		: CAFFE
 	   
 	    weight_filler {
 	      type: "msra"
@@ -548,6 +553,7 @@ layer {
 	convolution_param {
 		num_output	: 2
 		kernel_size	: 1
+		engine		: CAFFE
 		weight_filler {
 			type	: "msra"
 		}
