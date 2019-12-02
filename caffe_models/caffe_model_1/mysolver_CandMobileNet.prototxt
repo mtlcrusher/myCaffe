@@ -13,5 +13,6 @@ momentum2: 0.999
 # weight_decay: 0.0005
 snapshot: 5000
 snapshot_prefix: "/content/drive/My Drive/caffe_model/CandMobileNet_model"
+snapshot_after_train: true
 solver_mode: GPU
 type: "Adam"
