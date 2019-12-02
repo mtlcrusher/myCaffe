@@ -642,7 +642,7 @@ layer {
 	    pad			: 0
 	    kernel_size	: 1
 	    stride		: 1
-		engine		: CUDNN
+		engine		: CAFFE
 	   
 	    weight_filler {
 	      type: "msra"
