@@ -324,7 +324,7 @@ layer {
 	    pad			: 1
 	    kernel_size	: 3
 	    group		: 64
-	    stride		: 1
+	    stride		: 2
 		engine		: CAFFE
 	   
 	    weight_filler {
@@ -714,7 +714,7 @@ layer {
 	    pad			: 1
 	    kernel_size	: 3
 	    group		: 256
-	    stride		: 1
+	    stride		: 2
 		engine		: CAFFE
 	   
 	    weight_filler {

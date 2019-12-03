@@ -16,7 +16,7 @@ layer {
 
 	data_param {
 		source: "/content/data_dog_cat/train_lmdb"
-		batch_size: 16
+		batch_size: 64
 		backend: LMDB
 	}
 }
@@ -37,7 +37,7 @@ layer {
 
 	data_param {
 		source: "/content/data_dog_cat/val_lmdb"
-		batch_size: 16
+		batch_size: 64
 		backend: LMDB
 	}
 }
@@ -351,7 +351,7 @@ layer {
 	    pad			: 1
 	    kernel_size	: 3
 	    group		: 64
-	    stride		: 1
+	    stride		: 2
 		engine		: CAFFE
 	   
 	    weight_filler {
@@ -741,7 +741,7 @@ layer {
 	    pad			: 1
 	    kernel_size	: 3
 	    group		: 256
-	    stride		: 1
+	    stride		: 2
 		engine		: CAFFE
 	   
 	    weight_filler {
