@@ -11,7 +11,7 @@ momentum: 0.0
 weight_decay: 0.0005
 snapshot: 5000
 snapshot_prefix: "/content/drive/My Drive/caffe_model/CandMobileNet2_model"
-snapshot_after_train: "true"
+snapshot_after_train: true
 solver_mode: GPU
 type: "RMSProp"
 rms_decay: 0.98
