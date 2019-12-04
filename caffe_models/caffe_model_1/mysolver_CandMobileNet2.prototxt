@@ -1,0 +1,17 @@
+net: "/content/myCaffe/caffe_models/caffe_model_1/CandMobileNet_train2.prototxt"
+test_iter: 1000
+test_interval: 1000
+base_lr: 0.001
+lr_policy: "inv"
+gamma: 0.0001
+power: 0.75
+display: 1000
+max_iter: 100000
+momentum: 0.0
+weight_decay: 0.0005
+snapshot: 5000
+snapshot_prefix: "/content/drive/My Drive/caffe_model/CandMobileNet2_model"
+snapshot_after_train: "true"
+solver_mode: GPU
+type: "RMSProp"
+rms_decay: 0.98
