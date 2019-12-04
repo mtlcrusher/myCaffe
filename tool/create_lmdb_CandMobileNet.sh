@@ -8,7 +8,7 @@ DATA=/content/data_dog_cat
 TOOLS=/opt/caffe/build/tools
 
 TRAIN_DATA_ROOT=/content/data_dog_cat/train/
-VAL_DATA_ROOT=/content/data_dog_cat/train/
+VAL_DATA_ROOT=/content/data_dog_cat/test1/
 
 # Set RESIZE=true to resize the images to 256x256. Leave as false if images have
 # already been resized using another tool.
