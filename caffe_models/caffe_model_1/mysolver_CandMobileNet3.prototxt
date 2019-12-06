@@ -1,0 +1,15 @@
+net: "/content/myCaffe/caffe_models/caffe_model_1/CandMobileNet_train2.prototxt"
+test_iter: 170
+test_interval: 2000
+base_lr: 0.0001
+lr_policy: "step"
+gamma: 0.1
+stepsize: 1999
+display: 10
+max_iter: 10000
+momentum: 0.9
+weight_decay: 0.0005 
+snapshot: 5000
+snapshot_prefix: "/content/drive/My Drive/caffe_model/CandMobileNet2_model"
+snapshot_after_train: true
+solver_mode: GPU
