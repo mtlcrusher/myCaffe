@@ -9,7 +9,8 @@ layer {
 		phase: TRAIN
 	}
 	transform_param {
-		mirror: true
+		scale: 0.00390625
+		mirror: 1
 		crop_size: 192
 		mean_file: "/content/data_dog_cat/mean.binaryproto"
 	}
@@ -30,14 +31,14 @@ layer {
 		phase: TEST
 	}
 	transform_param {
-		mirror: false
+		mirror: 0
 		crop_size: 192
 		mean_file: "/content/data_dog_cat/mean.binaryproto"
 	}
 
 	data_param {
 		source: "/content/data_dog_cat/val_lmdb"
-		batch_size: 50
+		batch_size: 64
 		backend: LMDB
 	}
 }
@@ -51,7 +52,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 
 	convolution_param {
@@ -144,8 +145,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
-	}
+		decay_mult	: 1
 	
 	convolution_param {
 		num_output	: 32
@@ -236,7 +236,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -331,7 +331,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -423,7 +423,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -518,7 +518,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -610,7 +610,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -705,7 +705,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -797,7 +797,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -892,7 +892,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -984,7 +984,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -1079,7 +1079,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -1171,7 +1171,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -1266,7 +1266,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -1358,7 +1358,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -1453,7 +1453,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -1545,7 +1545,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -1640,7 +1640,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -1732,7 +1732,7 @@ layer {
 	# filter
 	param {
 		lr_mult		: 1
-		decay_mult	: 0
+		decay_mult	: 1
 	}
 	
 	convolution_param {
@@ -1833,11 +1833,11 @@ layer {
 	bottom	: "pool1"
 	top		: "fc7"
 	param {
-		lr_mult		: 1
+		lr_mult		: 3
 		decay_mult	: 1
 	}
 	param {
-		lr_mult		: 1
+		lr_mult		: 3
 		decay_mult	: 0
 	}
 	convolution_param {

@@ -1,9 +1,9 @@
 net: "/content/myCaffe/caffe_models/caffe_model_1/CandMobileNet_train2.prototxt"
 test_iter: 1000
 test_interval: 1000
-base_lr: 0.1
+base_lr: 0.001
 lr_policy: "inv"
-gamma: 0.001
+gamma: 0.0001
 power: 0.75
 display: 1000
 max_iter: 100000
