@@ -146,7 +146,7 @@ layer {
 	param {
 		lr_mult		: 1
 		decay_mult	: 1
-	
+	}
 	convolution_param {
 		num_output	: 32
 	    bias_term	: false
