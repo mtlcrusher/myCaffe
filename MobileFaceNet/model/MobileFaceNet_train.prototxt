@@ -15,7 +15,7 @@ layer {
 
   data_param {
     source: "/content/data_dog_cat/train_lmdb"
-    batch_size: 256
+    batch_size: 1
     backend: LMDB
   }
 }
@@ -36,7 +36,7 @@ layer {
 
   data_param {
     source: "/content/data_dog_cat/val_lmdb"
-    batch_size: 50
+    batch_size: 1
     backend: LMDB
   }
 }
