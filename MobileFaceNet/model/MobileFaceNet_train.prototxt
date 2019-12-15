@@ -15,7 +15,7 @@ layer {
 
   data_param {
     source: "/content/data_dog_cat/train_lmdb"
-    batch_size: 1
+    batch_size: 256
     backend: LMDB
   }
 }
@@ -36,7 +36,7 @@ layer {
 
   data_param {
     source: "/content/data_dog_cat/val_lmdb"
-    batch_size: 1
+    batch_size: 50
     backend: LMDB
   }
 }
@@ -2744,7 +2744,7 @@ layer {
     decay_mult: 1
   }
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     kernel_size: 1
     weight_filler {
@@ -2811,11 +2811,12 @@ layer {
     decay_mult: 1
   }
   convolution_param {
-    num_output: 256
+    num_output: 512
     bias_term: false
     pad: 1
     kernel_size: 3
-    group: 256
+    stride: 2
+    group: 512
     weight_filler {
       type: "msra"
     }
@@ -3134,27 +3135,19 @@ layer {
 
 # end of bottleneck
 
-layer {
-  name: "block3_1"
-  type: "Eltwise"
-  bottom: "conv40/linear"
-  bottom: "conv43/linear"
-  top: "block3_1"
-}
-
-# conv1x1
+# bottleneck
 
 layer {
-  name: "conv44"
+  name: "conv44/expand"
   type: "Convolution"
-  bottom: "block3_1"
-  top: "conv44"
+  bottom: "conv43/linear"
+  top: "conv44/expand"
   param {
-    lr_mult: 1.0
-    decay_mult: 1.0
+    lr_mult: 1
+    decay_mult: 1
   }
   convolution_param {
-    num_output: 512
+    num_output: 256
     bias_term: false
     kernel_size: 1
     weight_filler {
@@ -3164,10 +3157,10 @@ layer {
 }
 
 layer {
-  name: "conv44/bn"
+  name: "conv44/expand/bn"
   type: "BatchNorm"
-  bottom: "conv44"
-  top: "conv44"
+  bottom: "conv44/expand"
+  top: "conv44/expand"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3187,10 +3180,10 @@ layer {
 }
 
 layer {
-  name: "conv44/scale"
+  name: "conv44/expand/scale"
   type: "Scale"
-  bottom: "conv44"
-  top: "conv44"
+  bottom: "conv44/expand"
+  top: "conv44/expand"
   param {
     lr_mult: 1
     decay_mult: 0
@@ -3205,10 +3198,219 @@ layer {
 }
 
 layer {
-  name: "relu44"
+  name: "relu44/expand"
   type: "ReLU"
-  bottom: "conv44"
-  top: "conv44"
+  bottom: "conv44/expand"
+  top: "conv44/expand"
+}
+
+layer {
+  name: "conv45/dwise"
+  type: "Convolution"
+  bottom: "conv44/expand"
+  top: "conv45/dwise"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  convolution_param {
+    num_output: 256
+    bias_term: false
+    pad: 1
+    kernel_size: 3
+    group: 256
+    weight_filler {
+      type: "msra"
+    }
+    engine: CAFFE
+  }
+}
+
+layer {
+  name: "conv45/dwise/bn"
+  type: "BatchNorm"
+  bottom: "conv45/dwise"
+  top: "conv45/dwise"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  batch_norm_param {
+    use_global_stats: true
+    eps: 1e-5
+  }
+}
+
+layer {
+  name: "conv45/dwise/scale"
+  type: "Scale"
+  bottom: "conv45/dwise"
+  top: "conv45/dwise"
+  param {
+    lr_mult: 1
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 1
+    decay_mult: 0
+  }
+  scale_param {
+    bias_term: true
+  }
+}
+
+layer {
+  name: "relu45/dwise"
+  type: "ReLU"
+  bottom: "conv45/dwise"
+  top: "conv45/dwise"
+}
+
+layer {
+  name: "conv46/linear"
+  type: "Convolution"
+  bottom: "conv45/dwise"
+  top: "conv46/linear"
+  param {
+    lr_mult: 1
+    decay_mult: 1
+  }
+  convolution_param {
+    num_output: 128
+    bias_term: false
+    kernel_size: 1
+    weight_filler {
+      type: "msra"
+    }
+  }
+}
+
+layer {
+  name: "conv46/linear/bn"
+  type: "BatchNorm"
+  bottom: "conv46/linear"
+  top: "conv46/linear"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  batch_norm_param {
+    use_global_stats: true
+    eps: 1e-5
+  }
+}
+
+layer {
+  name: "conv46/linear/scale"
+  type: "Scale"
+  bottom: "conv46/linear"
+  top: "conv46/linear"
+  param {
+    lr_mult: 1
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 1
+    decay_mult: 0
+  }
+  scale_param {
+    bias_term: true
+  }
+}
+
+# end of bottleneck
+
+layer {
+  name: "block3_1"
+  type: "Eltwise"
+  bottom: "conv43/linear"
+  bottom: "conv46/linear"
+  top: "block3_1"
+}
+
+# conv1x1
+
+layer {
+  name: "conv47"
+  type: "Convolution"
+  bottom: "block3_1"
+  top: "conv47"
+  param {
+    lr_mult: 1.0
+    decay_mult: 1.0
+  }
+  convolution_param {
+    num_output: 512
+    bias_term: false
+    kernel_size: 1
+    weight_filler {
+      type: "msra"
+    }
+  }
+}
+
+layer {
+  name: "conv47/bn"
+  type: "BatchNorm"
+  bottom: "conv47"
+  top: "conv47"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  batch_norm_param {
+    use_global_stats: true
+    eps: 1e-5
+  }
+}
+
+layer {
+  name: "conv47/scale"
+  type: "Scale"
+  bottom: "conv47"
+  top: "conv47"
+  param {
+    lr_mult: 1
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 1
+    decay_mult: 0
+  }
+  scale_param {
+    bias_term: true
+  }
+}
+
+layer {
+  name: "relu47"
+  type: "ReLU"
+  bottom: "conv47"
+  top: "conv47"
 }
 
 # end of conv1x1
@@ -3216,10 +3418,10 @@ layer {
 # GDConv7x7
 
 layer {
-  name: "conv45"
+  name: "conv48"
   type: "Convolution"
-  bottom: "conv44"
-  top: "conv45"
+  bottom: "conv47"
+  top: "conv48"
   param {
     lr_mult: 1.0
     decay_mult: 1.0
@@ -3236,10 +3438,10 @@ layer {
 }
 
 layer {
-  name: "conv45/bn"
+  name: "conv48/bn"
   type: "BatchNorm"
-  bottom: "conv45"
-  top: "conv45"
+  bottom: "conv48"
+  top: "conv48"
   param {
     lr_mult: 0
     decay_mult: 0
@@ -3259,10 +3461,10 @@ layer {
 }
 
 layer {
-  name: "conv45/scale"
+  name: "conv48/scale"
   type: "Scale"
-  bottom: "conv45"
-  top: "conv45"
+  bottom: "conv48"
+  top: "conv48"
   param {
     lr_mult: 1
     decay_mult: 0
@@ -3277,10 +3479,10 @@ layer {
 }
 
 layer {
-  name: "relu45"
+  name: "relu48"
   type: "ReLU"
-  bottom: "conv45"
-  top: "conv45"
+  bottom: "conv48"
+  top: "conv48"
 }
 
 # end of GDConv7x7
@@ -3288,10 +3490,10 @@ layer {
 # linear conv1x1
 
 layer {
-  name: "conv46"
+  name: "conv49"
   type: "Convolution"
-  bottom: "conv45"
-  top: "conv46"
+  bottom: "conv48"
+  top: "conv49"
   param {
     lr_mult: 1.0
     decay_mult: 1.0
@@ -3317,7 +3519,7 @@ layer {
 layer {
   name: "accuracy"
   type: "Accuracy"
-  bottom: "conv46"
+  bottom: "conv49"
   bottom: "label"
   top: "accuracy"
   include {
@@ -3328,7 +3530,7 @@ layer {
 layer {
   name: "loss"
   type: "SoftmaxWithLoss"
-  bottom: "conv46"
+  bottom: "conv49"
   bottom: "label"
   top: "loss"
 }

@@ -1,8 +1,8 @@
 net: "/content/myCaffe/MobileFaceNet/model/MobileFaceNet_train.prototxt"
 #test_initialization: false
-#test_iter: 100
-#test_interval: 5000
-display: 20
+test_iter: 100
+test_interval: 5000
+display: 100
 average_loss: 20
 base_lr: 0.1
 lr_policy: "poly"
