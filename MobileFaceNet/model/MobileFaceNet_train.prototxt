@@ -339,7 +339,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -543,7 +542,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -755,7 +753,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -967,7 +964,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -1179,7 +1175,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -1392,7 +1387,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -1596,7 +1590,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -1800,7 +1793,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -2012,7 +2004,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -2224,7 +2215,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -2436,7 +2426,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -2648,7 +2637,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -2861,7 +2849,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -3065,7 +3052,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
@@ -3269,7 +3255,6 @@ layer {
     weight_filler {
       type: "msra"
     }
-    engine: CAFFE
   }
 }
 
