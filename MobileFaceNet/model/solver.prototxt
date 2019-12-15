@@ -1,4 +1,4 @@
-net: "/content/myCaffe/caffe_models/caffe_model_1/caffenet_train_val_1.prototxt"
+net: "/content/myCaffe/MobileFaceNet/model/MobileFaceNet_train.prototxt"
 #test_initialization: false
 #test_iter: 100
 #test_interval: 5000
