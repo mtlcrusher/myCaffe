@@ -179,12 +179,79 @@ layer {
   top: "conv1/dw"
 }
 
+layer {
+  name: "conv1/pw"
+  type: "Convolution"
+  bottom: "conv1/dw"
+  top: "conv1/pw"
+  param {
+    lr_mult: 1.0
+    decay_mult: 1.0
+  }
+  convolution_param {
+    num_output: 64
+    bias_term: false
+    kernel_size: 1
+    weight_filler {
+      type: "msra"
+    }
+  }
+}
+
+layer {
+  name: "conv1/pw/bn"
+  type: "BatchNorm"
+  bottom: "conv1/pw"
+  top: "conv1/pw"
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 0
+    decay_mult: 0
+  }
+  batch_norm_param {
+    use_global_stats: true
+    eps: 1e-5
+  }
+}
+
+layer {
+  name: "conv1/pw/scale"
+  type: "Scale"
+  bottom: "conv1/pw"
+  top: "conv1/pw"
+  param {
+    lr_mult: 1
+    decay_mult: 0
+  }
+  param {
+    lr_mult: 1
+    decay_mult: 0
+  }
+  scale_param {
+    bias_term: true
+  }
+}
+
+layer {
+  name: "relu1pw"
+  type: "ReLU"
+  bottom: "conv1/pw"
+  top: "conv1/pw"
+}
+
 # bottleneck
 
 layer {
   name: "conv2/expand"
   type: "Convolution"
-  bottom: "conv1/dw"
+  bottom: "conv1/pw"
   top: "conv2/expand"
   param {
     lr_mult: 1
