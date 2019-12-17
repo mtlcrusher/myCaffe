@@ -8,7 +8,6 @@ layer {
     phase: TRAIN
   }
   transform_param {
-    scale: 0.003921568
     mirror: true
     crop_size: 112
     mean_file: "/content/data_dog_cat/mean.binaryproto"
@@ -30,7 +29,6 @@ layer {
     phase: TEST
   }
   transform_param {
-    scale: 0.003921568
     mirror: false
     crop_size: 112
     mean_file: "/content/data_dog_cat/mean.binaryproto"
@@ -99,15 +97,21 @@ layer {
   bottom: "conv0"
   top: "conv0"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -174,15 +178,21 @@ layer {
   bottom: "conv1/dw"
   top: "conv1/dw"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -193,89 +203,16 @@ layer {
   top: "conv1/dw"
 }
 
-layer {
-  name: "conv1/pw"
-  type: "Convolution"
-  bottom: "conv1/dw"
-  top: "conv1/pw"
-  param {
-    lr_mult: 1.0
-    decay_mult: 1.0
-  }
-  convolution_param {
-    engine: CAFFE
-    num_output: 64
-    bias_term: true
-    kernel_size: 1
-    weight_filler {
-      type: "gaussian"
-      std: 0.01
-    }
-    bias_filler {
-      type: "constant"
-      value: 0
-    }
-  }
-}
-
-layer {
-  name: "conv1/pw/bn"
-  type: "BatchNorm"
-  bottom: "conv1/pw"
-  top: "conv1/pw"
-  param {
-    lr_mult: 0
-    decay_mult: 0
-  }
-  param {
-    lr_mult: 0
-    decay_mult: 0
-  }
-  param {
-    lr_mult: 0
-    decay_mult: 0
-  }
-  batch_norm_param {
-    use_global_stats: true
-    eps: 1e-5
-  }
-}
-
-layer {
-  name: "conv1/pw/scale"
-  type: "Scale"
-  bottom: "conv1/pw"
-  top: "conv1/pw"
-  param {
-    lr_mult: 1
-    decay_mult: 0
-  }
-  param {
-    lr_mult: 1
-    decay_mult: 0
-  }
-  scale_param {
-    bias_term: true
-  }
-}
-
-layer {
-  name: "relu1pw"
-  type: "ReLU"
-  bottom: "conv1/pw"
-  top: "conv1/pw"
-}
-
 # bottleneck
 
 layer {
   name: "conv2/expand"
   type: "Convolution"
-  bottom: "conv1/pw"
+  bottom: "conv1/dw"
   top: "conv2/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -322,15 +259,21 @@ layer {
   bottom: "conv2/expand"
   top: "conv2/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -347,8 +290,8 @@ layer {
   bottom: "conv2/expand"
   top: "conv3/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -398,15 +341,21 @@ layer {
   bottom: "conv3/dwise"
   top: "conv3/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -423,8 +372,8 @@ layer {
   bottom: "conv3/dwise"
   top: "conv4/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -471,15 +420,21 @@ layer {
   bottom: "conv4/linear"
   top: "conv4/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -493,8 +448,8 @@ layer {
   bottom: "conv4/linear"
   top: "conv5/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -541,15 +496,21 @@ layer {
   bottom: "conv5/expand"
   top: "conv5/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -566,8 +527,8 @@ layer {
   bottom: "conv5/expand"
   top: "conv6/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -616,15 +577,21 @@ layer {
   bottom: "conv6/dwise"
   top: "conv6/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -641,8 +608,8 @@ layer {
   bottom: "conv6/dwise"
   top: "conv7/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -689,15 +656,21 @@ layer {
   bottom: "conv7/linear"
   top: "conv7/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -719,8 +692,8 @@ layer {
   bottom: "block1_1"
   top: "conv8/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -767,15 +740,21 @@ layer {
   bottom: "conv8/expand"
   top: "conv8/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -792,8 +771,8 @@ layer {
   bottom: "conv8/expand"
   top: "conv9/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -842,15 +821,21 @@ layer {
   bottom: "conv9/dwise"
   top: "conv9/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -867,8 +852,8 @@ layer {
   bottom: "conv9/dwise"
   top: "conv10/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -915,15 +900,21 @@ layer {
   bottom: "conv10/linear"
   top: "conv10/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -945,8 +936,8 @@ layer {
   bottom: "block1_2"
   top: "conv11/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -993,15 +984,21 @@ layer {
   bottom: "conv11/expand"
   top: "conv11/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1018,8 +1015,8 @@ layer {
   bottom: "conv11/expand"
   top: "conv12/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1068,15 +1065,21 @@ layer {
   bottom: "conv12/dwise"
   top: "conv12/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1093,8 +1096,8 @@ layer {
   bottom: "conv12/dwise"
   top: "conv13/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1141,15 +1144,21 @@ layer {
   bottom: "conv13/linear"
   top: "conv13/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1171,8 +1180,8 @@ layer {
   bottom: "block1_3"
   top: "conv14/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1219,15 +1228,21 @@ layer {
   bottom: "conv14/expand"
   top: "conv14/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1244,8 +1259,8 @@ layer {
   bottom: "conv14/expand"
   top: "conv15/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1294,15 +1309,21 @@ layer {
   bottom: "conv15/dwise"
   top: "conv15/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1319,8 +1340,8 @@ layer {
   bottom: "conv15/dwise"
   top: "conv16/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1367,15 +1388,21 @@ layer {
   bottom: "conv16/linear"
   top: "conv16/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1397,8 +1424,8 @@ layer {
   bottom: "block1_4"
   top: "conv17/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1445,15 +1472,21 @@ layer {
   bottom: "conv17/expand"
   top: "conv17/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1470,8 +1503,8 @@ layer {
   bottom: "conv17/expand"
   top: "conv18/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1521,15 +1554,21 @@ layer {
   bottom: "conv18/dwise"
   top: "conv18/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1546,8 +1585,8 @@ layer {
   bottom: "conv18/dwise"
   top: "conv19/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1594,15 +1633,21 @@ layer {
   bottom: "conv19/linear"
   top: "conv19/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1616,8 +1661,8 @@ layer {
   bottom: "conv19/linear"
   top: "conv20/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1664,15 +1709,21 @@ layer {
   bottom: "conv20/expand"
   top: "conv20/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1689,8 +1740,8 @@ layer {
   bottom: "conv20/expand"
   top: "conv21/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1739,15 +1790,21 @@ layer {
   bottom: "conv21/dwise"
   top: "conv21/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1764,8 +1821,8 @@ layer {
   bottom: "conv21/dwise"
   top: "conv22/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1812,15 +1869,21 @@ layer {
   bottom: "conv22/linear"
   top: "conv22/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1834,8 +1897,8 @@ layer {
   bottom: "conv22/linear"
   top: "conv23/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1882,15 +1945,21 @@ layer {
   bottom: "conv23/expand"
   top: "conv23/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1907,8 +1976,8 @@ layer {
   bottom: "conv23/expand"
   top: "conv24/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -1957,15 +2026,21 @@ layer {
   bottom: "conv24/dwise"
   top: "conv24/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -1982,8 +2057,8 @@ layer {
   bottom: "conv24/dwise"
   top: "conv25/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2030,15 +2105,21 @@ layer {
   bottom: "conv25/linear"
   top: "conv25/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2060,8 +2141,8 @@ layer {
   bottom: "block2_1"
   top: "conv26/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2108,15 +2189,21 @@ layer {
   bottom: "conv26/expand"
   top: "conv26/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2133,8 +2220,8 @@ layer {
   bottom: "conv26/expand"
   top: "conv27/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2183,15 +2270,21 @@ layer {
   bottom: "conv27/dwise"
   top: "conv27/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2208,8 +2301,8 @@ layer {
   bottom: "conv27/dwise"
   top: "conv28/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2256,15 +2349,21 @@ layer {
   bottom: "conv28/linear"
   top: "conv28/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2286,8 +2385,8 @@ layer {
   bottom: "block2_2"
   top: "conv29/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2334,15 +2433,21 @@ layer {
   bottom: "conv29/expand"
   top: "conv29/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2359,8 +2464,8 @@ layer {
   bottom: "conv29/expand"
   top: "conv30/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2409,15 +2514,21 @@ layer {
   bottom: "conv30/dwise"
   top: "conv30/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2434,8 +2545,8 @@ layer {
   bottom: "conv30/dwise"
   top: "conv31/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2482,15 +2593,21 @@ layer {
   bottom: "conv31/linear"
   top: "conv31/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2512,8 +2629,8 @@ layer {
   bottom: "block2_3"
   top: "conv32/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2560,15 +2677,21 @@ layer {
   bottom: "conv32/expand"
   top: "conv32/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2585,8 +2708,8 @@ layer {
   bottom: "conv32/expand"
   top: "conv33/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2635,15 +2758,21 @@ layer {
   bottom: "conv33/dwise"
   top: "conv33/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2660,8 +2789,8 @@ layer {
   bottom: "conv33/dwise"
   top: "conv34/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2708,15 +2837,21 @@ layer {
   bottom: "conv34/linear"
   top: "conv34/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2738,8 +2873,8 @@ layer {
   bottom: "block2_4"
   top: "conv35/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2786,15 +2921,21 @@ layer {
   bottom: "conv35/expand"
   top: "conv35/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2811,8 +2952,8 @@ layer {
   bottom: "conv35/expand"
   top: "conv36/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2861,15 +3002,21 @@ layer {
   bottom: "conv36/dwise"
   top: "conv36/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2886,8 +3033,8 @@ layer {
   bottom: "conv36/dwise"
   top: "conv37/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -2934,15 +3081,21 @@ layer {
   bottom: "conv37/linear"
   top: "conv37/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -2964,8 +3117,8 @@ layer {
   bottom: "block2_5"
   top: "conv38/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -3012,15 +3165,21 @@ layer {
   bottom: "conv38/expand"
   top: "conv38/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -3037,8 +3196,8 @@ layer {
   bottom: "conv38/expand"
   top: "conv39/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -3088,15 +3247,21 @@ layer {
   bottom: "conv39/dwise"
   top: "conv39/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -3113,8 +3278,8 @@ layer {
   bottom: "conv39/dwise"
   top: "conv40/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -3161,15 +3326,21 @@ layer {
   bottom: "conv40/linear"
   top: "conv40/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -3183,8 +3354,8 @@ layer {
   bottom: "conv40/linear"
   top: "conv41/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -3231,15 +3402,21 @@ layer {
   bottom: "conv41/expand"
   top: "conv41/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -3256,8 +3433,8 @@ layer {
   bottom: "conv41/expand"
   top: "conv42/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -3306,15 +3483,21 @@ layer {
   bottom: "conv42/dwise"
   top: "conv42/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -3331,8 +3514,8 @@ layer {
   bottom: "conv42/dwise"
   top: "conv43/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -3379,15 +3562,21 @@ layer {
   bottom: "conv43/linear"
   top: "conv43/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -3401,8 +3590,8 @@ layer {
   bottom: "conv43/linear"
   top: "conv44/expand"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -3449,15 +3638,21 @@ layer {
   bottom: "conv44/expand"
   top: "conv44/expand"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -3474,8 +3669,8 @@ layer {
   bottom: "conv44/expand"
   top: "conv45/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -3524,15 +3719,21 @@ layer {
   bottom: "conv45/dwise"
   top: "conv45/dwise"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -3549,8 +3750,8 @@ layer {
   bottom: "conv45/dwise"
   top: "conv46/linear"
   param {
-    lr_mult: 1
-    decay_mult: 1
+    lr_mult: 0.1
+    decay_mult: 0.1
   }
   convolution_param {
     engine: CAFFE
@@ -3597,15 +3798,21 @@ layer {
   bottom: "conv46/linear"
   top: "conv46/linear"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -3675,15 +3882,21 @@ layer {
   bottom: "conv47"
   top: "conv47"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
@@ -3753,15 +3966,21 @@ layer {
   bottom: "conv48"
   top: "conv48"
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.1
+    decay_mult: 0.0
   }
   param {
-    lr_mult: 1
-    decay_mult: 0
+    lr_mult: 0.2
+    decay_mult: 0.0
   }
   scale_param {
+    filler {
+      value: 1
+    }
     bias_term: true
+    bias_filler {
+      value: 0
+    }
   }
 }
 
