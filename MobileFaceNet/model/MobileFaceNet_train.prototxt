@@ -8,6 +8,7 @@ layer {
     phase: TRAIN
   }
   transform_param {
+    scale: 0.003921568
     mirror: true
     crop_size: 112
     mean_file: "/content/data_dog_cat/mean.binaryproto"
@@ -29,6 +30,7 @@ layer {
     phase: TEST
   }
   transform_param {
+    scale: 0.003921568
     mirror: false
     crop_size: 112
     mean_file: "/content/data_dog_cat/mean.binaryproto"
