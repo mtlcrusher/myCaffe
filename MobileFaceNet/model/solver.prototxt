@@ -4,7 +4,7 @@ test_iter: 1000
 test_interval: 1000
 display: 100
 average_loss: 20
-base_lr: 0
+base_lr: 0.001
 lr_policy: "poly"
 power: 1.0
 max_iter: 500000
@@ -13,4 +13,4 @@ weight_decay: 0.0001
 snapshot: 5000
 snapshot_prefix: "/content/drive/My Drive/caffe_model/mobilefacenet"
 solver_mode: GPU
-debug_info: true
+#debug_info: true
