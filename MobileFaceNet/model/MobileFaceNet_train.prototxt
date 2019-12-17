@@ -8,7 +8,6 @@ layer {
     phase: TRAIN
   }
   transform_param {
-    scale: 0.00390625
     mirror: true
     crop_size: 112
     mean_file: "/content/data_dog_cat/mean.binaryproto"
@@ -30,7 +29,6 @@ layer {
     phase: TEST
   }
   transform_param {
-    scale: 0.00390625
     mirror: false
     crop_size: 112
     mean_file: "/content/data_dog_cat/mean.binaryproto"
@@ -55,13 +53,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 64
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 2
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -126,13 +128,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 64
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 64
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -197,11 +203,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 64
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -268,11 +278,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -337,7 +351,7 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     pad: 1
     stride: 2
     kernel_size: 3
@@ -345,6 +359,10 @@ layer {
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -409,11 +427,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 64
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -475,11 +497,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -544,13 +570,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 128
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -615,11 +645,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 64
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -689,11 +723,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -758,13 +796,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 128
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -829,11 +871,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 64
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -903,11 +949,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -972,13 +1022,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 128
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1043,11 +1097,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 64
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1117,11 +1175,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1186,13 +1248,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 128
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1257,11 +1323,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 64
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1331,11 +1401,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1400,7 +1474,7 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     pad: 1
     stride: 2
     kernel_size: 3
@@ -1408,6 +1482,10 @@ layer {
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1472,11 +1550,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1538,11 +1620,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1607,13 +1693,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 256
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1678,11 +1768,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1744,11 +1838,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1813,13 +1911,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 256
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1884,11 +1986,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -1958,11 +2064,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2027,13 +2137,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 256
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2098,11 +2212,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2172,11 +2290,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2241,13 +2363,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 256
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2312,11 +2438,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2386,11 +2516,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2455,13 +2589,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 256
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2526,11 +2664,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2600,11 +2742,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2669,13 +2815,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 256
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2740,11 +2890,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2814,11 +2968,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 512
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2883,7 +3041,7 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 512
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     stride: 2
@@ -2891,6 +3049,10 @@ layer {
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -2955,11 +3117,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -3021,11 +3187,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -3090,13 +3260,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 256
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -3161,11 +3335,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -3227,11 +3405,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -3296,13 +3478,17 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 256
-    bias_term: false
+    bias_term: true
     pad: 1
     kernel_size: 3
     group: 256
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -3367,11 +3553,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 128
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -3441,11 +3631,15 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 512
-    bias_term: false
+    bias_term: true
     kernel_size: 1
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
@@ -3514,12 +3708,16 @@ layer {
   convolution_param {
     engine: CAFFE
     num_output: 512
-    bias_term: false
+    bias_term: true
     kernel_size: 7
     group: 512
     weight_filler {
       type: "gaussian"
       std: 0.01
+    }
+    bias_filler {
+      type: "constant"
+      value: 0
     }
   }
 }
