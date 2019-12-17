@@ -1,4 +1,4 @@
-name:	"MobileFaceNet"
+name: "MobileFaceNet"
 layer {
   name: "data"
   type: "Input"
@@ -35,11 +35,11 @@ layer {
 }
 
 layer {
-	name: "conv0/bn"
-	type: "BatchNorm"
-	bottom: "conv0"
-	top: "conv0"
-	param {
+  name: "conv0/bn"
+  type: "BatchNorm"
+  bottom: "conv0"
+  top: "conv0"
+  param {
     lr_mult: 0
     decay_mult: 0
   }
@@ -3427,4 +3427,3 @@ layer {
   bottom: "conv49"
   top: "prob"
 }
-
