@@ -10,7 +10,7 @@ power: 1.0
 max_iter: 500000
 momentum: 0.9
 weight_decay: 0.0001
-snapshot: 5000
+snapshot: 2000
 snapshot_prefix: "/content/drive/My Drive/caffe_model/mobilefacenet"
 solver_mode: GPU
 #debug_info: true
