@@ -14,3 +14,4 @@ snapshot: 500
 snapshot_prefix: "/content/drive/My Drive/caffe_model/mobilefacenet"
 solver_mode: GPU
 #debug_info: true
+snapshot_after_train: true
