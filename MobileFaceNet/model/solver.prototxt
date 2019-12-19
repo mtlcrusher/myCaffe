@@ -1,7 +1,7 @@
 net: "/content/myCaffe/MobileFaceNet/model/MobileFaceNet_train.prototxt"
 test_initialization: false
 test_iter: 100
-test_interval: 1000
+test_interval: 500
 display: 100
 average_loss: 20
 base_lr: 0.001
@@ -10,7 +10,7 @@ power: 1.0
 max_iter: 500000
 momentum: 0.9
 weight_decay: 0.0001
-snapshot: 1000
+snapshot: 500
 snapshot_prefix: "/content/drive/My Drive/caffe_model/mobilefacenet"
 solver_mode: GPU
 #debug_info: true
