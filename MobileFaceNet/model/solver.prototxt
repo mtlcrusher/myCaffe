@@ -12,6 +12,6 @@ momentum: 0.9
 weight_decay: 0.00001
 snapshot: 500
 snapshot_prefix: "/content/drive/My Drive/caffe_model/mobilefacenet"
-solver_mode: GPU
+solver_mode: CPU
 #debug_info: true
 snapshot_after_train: true
